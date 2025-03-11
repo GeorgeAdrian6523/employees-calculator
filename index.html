@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medarbejderchurn Omkostninger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<style>
+   
+    body {
+        font-family: 'Work Sans', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 100px;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #303133;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 700px;
+        gap: 30px;
+    }
+
+    .input-section {
+        flex: 1;
+    }
+
+    #employeeSlider{
+        color: white;
+        accent-color: #b386cf;
+        margin-top: 10px;
+    }
+
+    label {
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+    }
+
+
+    input[type="range"] {
+        width: 100%;
+        background-color: #b638cf;
+        overflow:hidden;        
+    }
+
+    .accent {
+        accent-color: #b386cf;
+    }
+
+    #employeeCount {
+        font-weight: 700;
+        font-size: 18px;
+        color: white;
+    }
+
+    .output-card {
+        flex: 1;
+        background: #575757;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-left: 5px solid #b386cf;
+    }
+
+    .output-card p {
+        margin: 0;
+        font-size: 14px;
+        color: white;
+    }
+
+    #churnCost {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #b386cf;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+
+
+
+<div class="container">
+    <h1 style="font-size: 24px; font-weight: 700; color: white;">Medarbejderchurn Omkostninger</h1>
+    <div class="input-section">
+        <label for="employeeSlider">Antal medarbejdere:</label>
+        <input type="range" id="employeeSlider" class="accent" min="10" max="100" value="10" step="5">
+        <span id="employeeCount">10</span>
+    </div>
+
+    <div class="output-card">
+        <p>Estimeret årlig omkostning ved medarbejderchurn:</p>
+        <p id="churnCost">Beregn...</p>
+    </div>
+</div>
+
+<script>
+    const employeeSlider = document.getElementById('employeeSlider');
+    const employeeCountDisplay = document.getElementById('employeeCount');
+    const churnCostDisplay = document.getElementById('churnCost');
+
+    const churnRate = 0.13; // 13%
+    const costPerChurn = 633515; // DKK
+
+    function calculateChurnCost() {
+    const numEmployees = parseInt(employeeSlider.value, 10);
+    const expectedChurn = numEmployees * churnRate;
+    const totalCost = Math.round((expectedChurn * costPerChurn) / 13); // Rounded whole number
+
+    const formattedCost = totalCost.toLocaleString('da-DK'); // No currency formatting, just whole number
+
+    employeeCountDisplay.textContent = numEmployees;
+    churnCostDisplay.textContent = formattedCost + " DKK"; // Manually adding currency
+}
+
+
+    calculateChurnCost();
+    employeeSlider.addEventListener('input', calculateChurnCost);
+</script>
+
+</body>
+
+</html>

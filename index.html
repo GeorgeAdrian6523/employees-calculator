@@ -97,7 +97,7 @@
     <h1 style="font-size: 24px; font-weight: 700; color: white;">Medarbejderchurn Omkostninger</h1>
     <div class="input-section">
         <label for="employeeSlider">Antal medarbejdere:</label>
-        <input type="range" id="employeeSlider" class="accent" min="10" max="100" value="10" step="5">
+        <input type="range" id="employeeSlider" class="accent" min="5" max="100" value="10" step="5">
         <span id="employeeCount">10</span>
     </div>
 
@@ -112,13 +112,13 @@
     const employeeCountDisplay = document.getElementById('employeeCount');
     const churnCostDisplay = document.getElementById('churnCost');
 
-    const churnRate = 0.13; // 13%
+    const churnRate = 1.3; // 13%
     const costPerChurn = 633515; // DKK
 
     function calculateChurnCost() {
     const numEmployees = parseInt(employeeSlider.value, 10);
     const expectedChurn = numEmployees * churnRate;
-    const totalCost = Math.round((expectedChurn * costPerChurn) / 13); // Rounded whole number
+    const totalCost = Math.round((expectedChurn * costPerChurn) /10 ); // Rounded whole number
 
     const formattedCost = totalCost.toLocaleString('da-DK'); // No currency formatting, just whole number
 
